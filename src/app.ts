@@ -14,6 +14,7 @@ const app = express();
 
 configure({
     "appenders": {
+        'console': { type: 'console' },
         "debug" : {
             "type": "dateFile",
             "filename": "logs/application",
@@ -39,6 +40,7 @@ app.use(Middlewares.configuration);
 app.use(new BaseRoutes().routes);
 
 app.listen(app.get("port"), () => {
+    console.log("server started at http://localhost:" + app.get("port"));
     logger.debug("server started at http://localhost:" + app.get("port"));
 });
 

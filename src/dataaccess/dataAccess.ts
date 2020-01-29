@@ -14,6 +14,7 @@ class DataAccess {
         this.mongooseConnection = Mongoose.connection;
         this.mongooseConnection.once("open", () => {
             logger.debug("Connected to mongodb.");
+            console.log("Connected to mongodb.");
         });
         Mongoose.set("debug", true);
         const dbURL = "mongodb://127.0.0.1:27017/" + dbConfig;
