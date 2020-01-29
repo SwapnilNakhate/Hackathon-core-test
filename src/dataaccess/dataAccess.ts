@@ -1,5 +1,7 @@
 import * as Mongoose from "mongoose";
 import config = require("config");
+import { getLogger } from 'log4js';
+const logger = getLogger("Dataccess");
 let dbConfig = config.get("database.name");
 
 class DataAccess {
@@ -11,7 +13,7 @@ class DataAccess {
 
         this.mongooseConnection = Mongoose.connection;
         this.mongooseConnection.once("open", () => {
-            console.log("Connected to mongodb.");
+            logger.debug("Connected to mongodb.");
         });
         Mongoose.set("debug", true);
         const dbURL = "mongodb://127.0.0.1:27017/" + dbConfig;

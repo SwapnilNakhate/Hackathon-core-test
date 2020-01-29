@@ -14,6 +14,8 @@
     "no-consecutive-blank-lines": false,
     "whitespace": false,
     "typedef-whitespace": false,
+    "quotemark": false,
+    "object-literal-key-quotes": false,
     "no-trailing-whitespace": false,
     "no-irregular-whitespace": false,
     "space-before-function-paren": false,
