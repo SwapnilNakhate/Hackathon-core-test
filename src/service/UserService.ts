@@ -1,4 +1,3 @@
-import {UserInfo} from "os";
 import User = require("../dataaccess/mongoose/User");
 import UserRepository = require("../dataaccess/repository/UserRepository");
 
