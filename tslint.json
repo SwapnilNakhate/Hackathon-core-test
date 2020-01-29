@@ -7,7 +7,22 @@
   "rules": {
     "no-console": false,
     "no-empty": false,
+    "align": false,
+    "object-literal-sort-keys": false,
     "no-var-requires": true,
+    "ordered-imports": false,
+    "no-consecutive-blank-lines": false,
+    "whitespace": false,
+    "typedef-whitespace": false,
+    "no-trailing-whitespace": false,
+    "no-irregular-whitespace": false,
+    "space-before-function-paren": false,
+    "space-within-parens":false,
+    "prefer-const":false,
+    "max-line-length":false,
+    "comment-format":false,
+    "member-access":false,
+    "arrow-parens":false,
     "trailing-comma": [ false ]
   },
   "rulesDirectory": []

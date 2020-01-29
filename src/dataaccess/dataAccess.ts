@@ -12,7 +12,7 @@ class DataAccess {
             console.log("Connected to mongodb.");
         });
         Mongoose.set("debug", true);
-        this.mongooseInstance = Mongoose.connect("mongodb://127.0.0.1:27017/my_db");
+        this.mongooseInstance = Mongoose.connect("mongodb://127.0.0.1:27017/hackathon", { useNewUrlParser: true });
         return this.mongooseInstance;
     }
 }
