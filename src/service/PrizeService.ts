@@ -1,5 +1,7 @@
 import Prize = require("../dataaccess/mongoose/Prize");
 import PrizeRepository = require("../dataaccess/repository/PrizeRepository");
+import { getLogger } from 'log4js';
+const logger = getLogger("Prize Service");
 
 class PrizeService {
 

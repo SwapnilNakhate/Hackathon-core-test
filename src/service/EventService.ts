@@ -1,5 +1,7 @@
 import Event = require("../dataaccess/mongoose/Event");
 import EventRepository = require("../dataaccess/repository/EventRepository");
+import { getLogger } from 'log4js';
+const logger = getLogger("Event Service");
 
 class EventService {
 

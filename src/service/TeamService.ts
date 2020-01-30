@@ -1,5 +1,7 @@
 import Team = require("../dataaccess/mongoose/Team");
 import TeamRepository = require("../dataaccess/repository/TeamRepository");
+import { getLogger } from 'log4js';
+const logger = getLogger("Team Service");
 
 class TeamService {
 

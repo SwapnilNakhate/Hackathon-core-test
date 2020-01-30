@@ -1,3 +1,7 @@
+const bcrypt = require('bcryptjs');
+const config = require('config');
+import { getLogger } from 'log4js';
+const logger = getLogger("User Service");
 import User = require("../dataaccess/mongoose/User");
 import UserRepository = require("../dataaccess/repository/UserRepository");
 
@@ -10,6 +14,10 @@ class UserService {
     }
 
     public createUserData(user: User, callback: (error: any, response: any) => void) {
+        const salt = bcrypt.genSaltSync(config.get('saltRounds'));
+        const hash = bcrypt.hashSync(user.password, salt);
+        user.password = hash;
+        logger.debug('user.password : '+user.password);
         this.userRepository.create(user, (error, result) => {
             if (error) {
                 callback(error, null);
@@ -57,6 +65,31 @@ class UserService {
                 callback(error, null);
             } else {
                 callback(null, result);
+            }
+        });
+    }
+
+    public loginUser(userCredentials: any, callback: (error: any, response: any) => void) {
+        let findUserQuery = { email : userCredentials.email };
+        this.userRepository.retrieveOne(findUserQuery, (err, res) => {
+            if (err) {
+                callback(err, null);
+            } else if(res) {
+                bcrypt.compare(userCredentials.password, res.password, (error: any, result: any) => {
+                    if(error) {
+                        callback(error, null);
+                    } else if(result) {
+                        callback(null, res);
+                    } else {
+                        let errorMessage = new Error();
+                        errorMessage.message = "Invalid Credentials.";
+                        callback(errorMessage, null);
+                    }
+                });
+            } else {
+                let errorMessage = new Error();
+                errorMessage.message = "User not found";
+                callback(errorMessage, null);
             }
         });
     }

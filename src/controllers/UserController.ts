@@ -1,4 +1,6 @@
 import * as express from "express";
+import { getLogger } from 'log4js';
+const logger = getLogger("User Controller");
 import UserService = require("../service/UserService");
 
 class UserController {
@@ -84,6 +86,22 @@ class UserController {
             });
         } catch (e) {
             console.log("Exception in deleting User by Id : ", e);
+        }
+    }
+
+    public loginUser(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            const userCredentials = req.body;
+            const userService = new UserService();
+            userService.loginUser(userCredentials, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            console.log("Exception in creating User Data : ", e);
         }
     }
 }

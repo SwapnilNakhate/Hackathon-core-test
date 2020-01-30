@@ -1,4 +1,6 @@
 import * as express from "express";
+import { getLogger } from 'log4js';
+const logger = getLogger("Prize Controller");
 import PrizeService = require("../service/PrizeService");
 
 class PrizeController {

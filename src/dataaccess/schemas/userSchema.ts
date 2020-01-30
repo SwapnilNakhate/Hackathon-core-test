@@ -10,7 +10,8 @@ class UserSchema {
 
         const user = new Schema({
                 email: {
-                    type: String
+                    type: String,
+                    unique: true
                 },
                 firstName: {
                     type: String
@@ -18,6 +19,9 @@ class UserSchema {
                 lastName: {
                     type: String
                 },
+                password : {
+                    type: String
+                }
             },
             {
                 timestamps: true,

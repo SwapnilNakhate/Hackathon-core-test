@@ -1,4 +1,6 @@
 import * as express from "express";
+import { getLogger } from 'log4js';
+const logger = getLogger("Team Controller");
 import TeamService = require("../service/TeamService");
 
 class TeamController {

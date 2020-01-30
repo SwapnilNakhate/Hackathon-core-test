@@ -1,5 +1,7 @@
 import Organizer = require("../dataaccess/mongoose/Organizer");
 import OrganizerRepository = require("../dataaccess/repository/OrganizerRepository");
+import { getLogger } from 'log4js';
+const logger = getLogger("Organizer Service");
 
 class OrganizerService {
 

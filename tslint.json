@@ -9,7 +9,7 @@
     "no-empty": false,
     "align": false,
     "object-literal-sort-keys": false,
-    "no-var-requires": true,
+    "no-var-requires": false,
     "ordered-imports": false,
     "no-consecutive-blank-lines": false,
     "whitespace": false,
