@@ -1,7 +1,14 @@
+
 class Event {
-    public email: string;
-    public firstName: string;
-    public lastName: string;
+
+    public name: string;
+    public logo: string;
+    public shortDescription: string;
+    public maxTeamSize: number;
+    public startDateTime: Date;
+    public endDateTime: Date;
+
     constructor() {}
+
 }
 export = Event;

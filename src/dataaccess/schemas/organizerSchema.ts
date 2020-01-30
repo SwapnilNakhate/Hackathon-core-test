@@ -13,12 +13,18 @@ class OrganizerSchema {
                     type: String,
                     unique: true
                 },
-                firstName: {
+                name: {
                     type: String
                 },
-                lastName: {
+                organization: {
                     type: String
                 },
+                logo : {
+                    type: String
+                },
+                contactNo : {
+                    type: Number
+                }
             },
             {
                 timestamps: true,

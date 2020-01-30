@@ -9,15 +9,24 @@ class EventSchema {
     static get schema() {
 
         const event = new Schema({
-                email: {
+                name: {
                     type: String
                 },
-                firstName: {
+                shortDescription: {
                     type: String
                 },
-                lastName: {
+                logo: {
                     type: String
                 },
+                maxTeamSize: {
+                    type: Number
+                },
+                startDateTime: {
+                    type: Date
+                },
+                endDateTime: {
+                    type: Date
+                }
             },
             {
                 timestamps: true,
