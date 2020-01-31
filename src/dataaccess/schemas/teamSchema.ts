@@ -19,12 +19,14 @@ class TeamSchema {
                     type: Schema.Types.ObjectId,
                     ref: 'User'
                 },
-                members: {
-                    type: Array
-                },
-                events: {
-                    type: Array
-                }
+                members: [{
+                    type: Schema.Types.ObjectId,
+                    ref: 'User'
+                }],
+                events: [{
+                    type: Schema.Types.ObjectId,
+                    ref: 'Event'
+                }]
             },
             {
                 timestamps: true,

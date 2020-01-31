@@ -32,7 +32,7 @@ class TeamService {
     }
 
     public getAllTeamData(callback: (error: any, response: any) => void) {
-        this.teamRepository.retrieve({}, (error, result) => {
+        this.teamRepository.retrieveWithPopulate({}, 'members', (error, result) => {
             if (error) {
                 callback(error, null);
             } else {

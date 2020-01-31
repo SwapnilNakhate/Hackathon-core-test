@@ -88,6 +88,22 @@ class OrganizerController {
             console.log("Exception in deleting Organizer by Id : ", e);
         }
     }
+    
+    public loginOrganizer(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            const organizerCredentials = req.body;
+            const organizerService = new OrganizerService();
+            organizerService.loginOrganizer(organizerCredentials, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            console.log("Exception in creating Organizer Data : ", e);
+        }
+    }
 }
 
 export = OrganizerController;

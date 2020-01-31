@@ -13,6 +13,7 @@ class BaseRoutes {
         app.use("/api/organizers/", new OrganizerRoutes().routes);
         app.use("/api/events/", new EventRoutes().routes);
         app.use("/api/prizes/", new PrizeRoutes().routes);
+        app.use("/api/teams/", new TeamRoutes().routes);
         return app;
     }
 }

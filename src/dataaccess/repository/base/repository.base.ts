@@ -70,6 +70,16 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
+  public retrieveWithPopulate(field: any, populateFields: any, callback: (error: any, result: any) => void) {
+    this.schemaModel.find(field, (error: Error, result: T) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, result);
+      }
+    }).populate(populateFields);
+  }
+
 }
 
 export = RepositoryBase;

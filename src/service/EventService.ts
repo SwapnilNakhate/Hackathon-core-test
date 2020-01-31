@@ -32,7 +32,7 @@ class EventService {
     }
 
     public getAllEventData(callback: (error: any, response: any) => void) {
-        this.eventRepository.retrieve({}, (error, result) => {
+        this.eventRepository.retrieveWithPopulate({}, 'prizes', (error, result) => {
             if (error) {
                 callback(error, null);
             } else {

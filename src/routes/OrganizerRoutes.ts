@@ -16,6 +16,7 @@ class OrganizerRoutes {
         router.get("/:id", this.organizerController.getOrganizerById);
         router.put("/:id", this.organizerController.updateOrganizer);
         router.delete("/:id", this.organizerController.deleteOrganizerById);
+        router.post("/login", this.organizerController.loginOrganizer);
         return router;
     }
 }
