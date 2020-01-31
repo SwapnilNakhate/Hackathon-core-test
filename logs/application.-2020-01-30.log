@@ -1,2 +1,26 @@
 [2020-01-30T00:00:00.188] [DEBUG] Dataccess - Connected to mongodb.
 [2020-01-30T00:06:19.947] [DEBUG] Dataccess - Connected to mongodb.
+[2020-01-30T13:29:43.515] [DEBUG] Event Controller - Initiated Event Controller
+[2020-01-30T13:29:43.521] [DEBUG] default - server started at http://localhost:8080
+[2020-01-30T13:29:43.538] [DEBUG] Dataccess - Connected to mongodb.
+[2020-01-30T16:34:29.299] [DEBUG] Event Controller - Initiated Event Controller
+[2020-01-30T16:34:29.320] [DEBUG] default - server started at http://localhost:8080
+[2020-01-30T16:34:29.358] [DEBUG] Dataccess - Connected to mongodb.
+[2020-01-30T16:34:46.239] [DEBUG] User Service - user.password : $2b$10$341U53T4/hzF21/6s4nSE.ZUCFp8W/mAgeC0Etv.5wF5MtebiFkve
+[2020-01-30T16:46:09.564] [DEBUG] Event Controller - Initiated Event Controller
+[2020-01-30T16:46:09.569] [DEBUG] default - server started at http://localhost:8080
+[2020-01-30T16:46:09.582] [DEBUG] Dataccess - Connected to mongodb.
+[2020-01-30T16:47:10.439] [DEBUG] Event Controller - Initiated Event Controller
+[2020-01-30T16:47:10.445] [DEBUG] default - server started at http://localhost:8080
+[2020-01-30T16:47:10.457] [DEBUG] Dataccess - Connected to mongodb.
+[2020-01-30T16:51:41.845] [DEBUG] Event Controller - Initiated Event Controller
+[2020-01-30T16:51:41.850] [DEBUG] default - server started at http://localhost:8080
+[2020-01-30T16:51:41.865] [DEBUG] Dataccess - Connected to mongodb.
+[2020-01-30T16:52:38.977] [DEBUG] Event Controller - Initiated Event Controller
+[2020-01-30T16:52:38.984] [DEBUG] default - server started at http://localhost:8080
+[2020-01-30T16:52:39.002] [DEBUG] Dataccess - Connected to mongodb.
+[2020-01-30T16:52:41.892] [DEBUG] User Service - user.password : $2a$10$0lQ0voH71ivc3ufFhUR1GOYpVPwa5dT4NvToDu160VP49TmDQ7XnS
+[2020-01-30T16:55:38.535] [DEBUG] Event Controller - Initiated Event Controller
+[2020-01-30T16:55:38.542] [DEBUG] default - server started at http://localhost:8080
+[2020-01-30T16:55:38.562] [DEBUG] Dataccess - Connected to mongodb.
+[2020-01-30T16:55:46.908] [DEBUG] User Service - user.password : $2a$10$85dc3Q4O9ahGF7tnB5xZW.xk5Gi9X9PivMq0uLnnLG.rEH7IYPKee
