@@ -14,6 +14,7 @@ class EventRoutes {
         router.post("/", this.eventController.createEvent);
         router.get("/", this.eventController.getAllEvents);
         router.get("/:id", this.eventController.getEventById);
+        router.get("/organizer/:organizerId", this.eventController.getAllEventByOrganizerId);
         router.put("/:id", this.eventController.updateEvent);
         router.delete("/:id", this.eventController.deleteEventById);
         return router;

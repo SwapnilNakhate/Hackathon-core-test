@@ -1,6 +1,7 @@
 import * as express from "express";
 import EventService = require("../service/EventService");
 import { getLogger } from 'log4js';
+const mongoose = require('mongoose'); 
 const logger = getLogger("Event Controller");
 
 class EventController {
@@ -33,6 +34,23 @@ class EventController {
             const eventService = new EventService();
             const eventId = req.params.id;
             eventService.getEventById(eventId, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            logger.error("Exception in getting all Event Data . ", e);
+        }
+    }
+
+    public getAllEventByOrganizerId(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            logger.debug("Get Event by oragnizer Id");
+            const eventService = new EventService();
+            const organizerId = mongoose.Types.ObjectId(req.params.organizerId);
+            eventService.getAllEventByOrganizerId(organizerId, (error , result) => {
                 if (error) {
                     res.send(error);
                 } else {

@@ -31,6 +31,17 @@ class EventService {
         });
     }
 
+    public getAllEventByOrganizerId(organizer: any, callback: (error: any, response: any) => void) {
+        let query = { organizerId : organizer };
+        this.eventRepository.retrieve(query, (error, result) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
     public getAllEventData(callback: (error: any, response: any) => void) {
         this.eventRepository.retrieveWithPopulate({}, 'prizes', (error, result) => {
             if (error) {

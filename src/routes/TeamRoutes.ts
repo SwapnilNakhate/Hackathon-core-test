@@ -14,7 +14,7 @@ class TeamRoutes {
         router.post("/", this.teamController.createTeam);
         router.get("/", this.teamController.getAllTeams);
         router.get("/:id", this.teamController.getTeamById);
-        router.get("/details/:userId", this.teamController.getTeamByUserId);
+        router.get("/user/:userId", this.teamController.getTeamByUserId);
         router.put("/:id", this.teamController.updateTeam);
         router.delete("/:id", this.teamController.deleteTeamById);
         return router;
