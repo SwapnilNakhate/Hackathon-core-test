@@ -45,7 +45,7 @@ class EventSchema {
                 },
                 prizes :  [{ type: Schema.Types.ObjectId, ref: 'Prize' }],
                 teams :  [{
-                    teamId: { type: String }, repoLink: { type: String }
+                    teamId: { type: Schema.Types.ObjectId, ref: 'Team' }, repoLink: { type: String }
                 }]
             },
             {

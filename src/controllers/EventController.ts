@@ -130,6 +130,23 @@ class EventController {
             logger.error("Exception in updating Event Data : ", e);
         }
     }
+
+    public getAllTeamsByEventId(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            logger.debug("Get all Events");
+            const eventId = req.params.id;
+            const eventService = new EventService();
+            eventService.getAllTeamsByEventId(eventId, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            logger.error("Exception in getting all Event Data . ", e);
+        }
+    }
 }
 
 export = EventController;
