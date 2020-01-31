@@ -85,7 +85,12 @@ class EventService {
                     const eventFindQuery = { _id: eventId};
                     let team = {
                         _id: temId,
-                        repoLink : ""
+                        repoLink : "",
+                        coding_standards: 0,
+                        creativity: 0,
+                        usablity: 0,
+                        ui_ux: 0,
+                        functionalCompleteness: 0,
                     };
                     const updatedEvent = { $push : { teams : team }};
                     this.eventRepository.update(eventFindQuery, updatedEvent, {new: true}, (errStack, data) => {
