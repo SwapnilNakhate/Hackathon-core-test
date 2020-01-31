@@ -63,6 +63,34 @@ class EventService {
         });
     }
 
+    public enrollForEvent(eventId: any, temId: any, callback: (error: any, response: any) => void) {
+        const findQuery = { _id: eventId, "teams._id" : temId };
+        this.eventRepository.retrieve(findQuery, (err, result) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                if(result.length === 0) {
+                    const eventFindQuery = { _id: eventId};
+                    let team = {
+                        _id: temId,
+                        repoLink : ""
+                    };
+                    const updatedEvent = { $push : { teams : team }};
+                    this.eventRepository.update(eventFindQuery, updatedEvent, {new: true}, (errStack, data) => {
+                        if (errStack) {
+                            callback(errStack, null);
+                        } else {
+                            callback(null, data);
+                        }
+                    });
+                } else {
+                    let errorMessage = new Error();
+                    errorMessage.message = "You have already applied for his event.";
+                    callback(errorMessage, null);
+                }
+            }
+        });
+    }
     public deleteEventById(eventId: any, callback: (error: any, response: any) => void) {
         const updateQuery = { _id : eventId };
         this.eventRepository.deleteById(updateQuery, (error, result) => {

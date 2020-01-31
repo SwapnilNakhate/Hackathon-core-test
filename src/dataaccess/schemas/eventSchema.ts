@@ -43,7 +43,10 @@ class EventSchema {
                 status: {
                     type: String
                 },
-                prizes :  [{ type: Schema.Types.ObjectId, ref: 'Prize' }]
+                prizes :  [{ type: Schema.Types.ObjectId, ref: 'Prize' }],
+                teams :  [{
+                    teamId: { type: String }, repoLink: { type: String }
+                }]
             },
             {
                 timestamps: true,

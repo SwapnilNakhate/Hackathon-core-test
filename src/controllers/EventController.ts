@@ -112,6 +112,24 @@ class EventController {
             logger.error("Exception in deleting Event by Id : ", e);
         }
     }
+    
+    public enrollForEvent(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            logger.debug("Enroll for an Event");
+            const eventId = req.body.eventId;
+            const teamId = req.body.teamId;
+            const eventService = new EventService();
+            eventService.enrollForEvent(eventId, teamId, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            logger.error("Exception in updating Event Data : ", e);
+        }
+    }
 }
 
 export = EventController;

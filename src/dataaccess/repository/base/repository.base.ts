@@ -55,6 +55,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       if (error) {
         callback(error, null);
       } else {
+        console.log('Updated ::: '+result);
         callback(null, result);
       }
     });

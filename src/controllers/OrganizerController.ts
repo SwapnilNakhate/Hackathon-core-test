@@ -1,5 +1,6 @@
 import * as express from "express";
 import { getLogger } from 'log4js';
+const mongoose = require('mongoose'); 
 const logger = getLogger("Organizer Controller");
 import OrganizerService = require("../service/OrganizerService");
 
