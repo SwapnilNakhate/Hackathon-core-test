@@ -9,15 +9,22 @@ class TeamSchema {
     static get schema() {
 
         const user = new Schema({
-                email: {
+                name: {
                     type: String
                 },
-                firstName: {
+                tagline: {
                     type: String
                 },
-                lastName: {
-                    type: String
+                teamLeaderId: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'User'
                 },
+                members: {
+                    type: Array
+                },
+                events: {
+                    type: Array
+                }
             },
             {
                 timestamps: true,

@@ -9,15 +9,18 @@ class PrizeSchema {
     static get schema() {
 
         const prize = new Schema({
-                email: {
+                rank: {
+                    type: Number
+                },
+                title: {
                     type: String
                 },
-                firstName: {
+                description: {
                     type: String
                 },
-                lastName: {
-                    type: String
-                },
+                amount: {
+                    type: Number
+                }
             },
             {
                 timestamps: true,

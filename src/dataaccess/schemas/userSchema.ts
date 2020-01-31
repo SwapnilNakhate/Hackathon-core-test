@@ -21,6 +21,10 @@ class UserSchema {
                 },
                 password : {
                     type: String
+                },
+                teamId : {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Team'
                 }
             },
             {

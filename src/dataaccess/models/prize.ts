@@ -1,7 +1,8 @@
 class Prize {
-    public email: string;
-    public firstName: string;
-    public lastName: string;
+    public rank: number;
+    public title: string;
+    public amount: number;
+    public description: string;
     constructor() {}
 }
 export = Prize;

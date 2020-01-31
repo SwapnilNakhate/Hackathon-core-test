@@ -13,6 +13,9 @@ class OrganizerSchema {
                     type: String,
                     unique: true
                 },
+                password: {
+                    type: String
+                },
                 name: {
                     type: String
                 },
@@ -24,7 +27,11 @@ class OrganizerSchema {
                 },
                 contactNo : {
                     type: Number
-                }
+                },
+                events : [{
+                    type: Schema.Types.ObjectId,
+                    ref: 'Event' 
+                }]
             },
             {
                 timestamps: true,

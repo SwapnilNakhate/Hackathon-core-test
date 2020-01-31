@@ -15,7 +15,20 @@ class EventSchema {
                 shortDescription: {
                     type: String
                 },
+                organizerId: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Organizer' 
+                },
                 logo: {
+                    type: String
+                },
+                problemStatement: {
+                    type: String
+                },
+                rulesAndRegulations : {
+                    type: String
+                },
+                winnerTeamId: {
                     type: String
                 },
                 maxTeamSize: {
@@ -26,7 +39,11 @@ class EventSchema {
                 },
                 endDateTime: {
                     type: Date
-                }
+                },
+                status: {
+                    type: String
+                },
+                prizes :  [{ type: Schema.Types.ObjectId, ref: 'Prize' }]
             },
             {
                 timestamps: true,
