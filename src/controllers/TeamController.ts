@@ -1,5 +1,6 @@
 import * as express from "express";
 import { getLogger } from 'log4js';
+const mongoose = require('mongoose'); 
 const logger = getLogger("Team Controller");
 import TeamService = require("../service/TeamService");
 
@@ -41,6 +42,21 @@ class TeamController {
         }
     }
 
+    public getTeamByUserId(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            const teamService = new TeamService();
+            const userId = mongoose.Types.ObjectId(req.params.userId);
+            teamService.getTeamByUserId(userId, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            console.log("Exception in getting all Team Data . ", e);
+        }
+    }
     public getAllTeams(req: express.Request, res: express.Response, next: express.NextFunction): void {
         try {
             const teamService = new TeamService();

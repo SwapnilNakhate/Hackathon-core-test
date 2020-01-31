@@ -31,6 +31,17 @@ class TeamService {
         });
     }
 
+    public getTeamByUserId(userId: any, callback: (error: any, response: any) => void) {
+        let query = { members: { $in: [ userId ] } };
+        this.teamRepository.retrieve(query, (error, result) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
     public getAllTeamData(callback: (error: any, response: any) => void) {
         this.teamRepository.retrieveWithPopulate({}, 'members', (error, result) => {
             if (error) {
