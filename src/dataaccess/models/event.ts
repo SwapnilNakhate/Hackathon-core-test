@@ -7,8 +7,8 @@ class Event {
     public organizerId: string;
     public shortDescription: string;
     public maxTeamSize: number;
-    public startDateTime: Date;
-    public endDateTime: Date;
+    public startDateTime: string;
+    public endDateTime: string;
     public problemStatement: string;
     public rulesAndRegulations: string;
     public winnerTeamId: string;
