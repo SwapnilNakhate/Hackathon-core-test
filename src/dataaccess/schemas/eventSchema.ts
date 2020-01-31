@@ -48,10 +48,10 @@ class EventSchema {
                     teamId: { type: Schema.Types.ObjectId, ref: 'Team' },
                     repoLink: { type: String },
                     coding_standards: { type: Number, default: 0 },
-                    creativity: { type: Number, default: 0 },
                     usablity: { type: Number, default: 0 },
                     ui_ux: { type: Number, default: 0 },
-                    functionalCompleteness: { type: Number, default: 0 }
+                    functionalCompleteness: { type: Number, default: 0 },
+                    finalScore: { type: Number, default: 0 }
                 }]
             },
             {

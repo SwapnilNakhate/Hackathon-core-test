@@ -147,6 +147,23 @@ class EventController {
             logger.error("Exception in getting all Event Data . ", e);
         }
     }
+
+    public evaluateEventById(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            logger.debug("Get all Events");
+            const eventId = req.params.id;
+            const eventService = new EventService();
+            eventService.evaluateEventById(eventId, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            logger.error("Exception in getting all Event Data . ", e);
+        }
+    }
 }
 
 export = EventController;

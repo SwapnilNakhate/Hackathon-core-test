@@ -118,6 +118,28 @@ class EventService {
             }
         });
     }
+
+    public evaluateEventById(eventId: any, callback: (error: any, response: any) => void) {
+        const query = { _id: eventId };
+        const populateQuery = { path: 'teams._id', model: 'Team'};
+        this.eventRepository.retrieveWithPopulate(query, populateQuery, (error, result) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                let eventDetails = result[0];
+                let allParticipatedTeams = eventDetails.teams;
+                for(let team of allParticipatedTeams) {
+                    let score1 = ( team.functionalCompleteness / 10) * 0.4;
+                    let score2 = ( team.usablity / 10) * 0.2;
+                    let score3 = ( team.ui_ux / 10) * 0.2;
+                    let score4 = ( team.coding_standards / 10) * 0.2;
+                    team.finalScore = score1 + score2 + score3 + score4;
+                }
+                let teamList = { teams : allParticipatedTeams };
+                callback(null, teamList);
+            }
+        });
+    }
 }
 
 Object.seal(EventService);
