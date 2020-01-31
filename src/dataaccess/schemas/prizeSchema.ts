@@ -20,6 +20,13 @@ class PrizeSchema {
                 },
                 amount: {
                     type: Number
+                },
+                eventId: {
+                    type: String
+                },
+                winnerTeamID: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Team' 
                 }
             },
             {
