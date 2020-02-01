@@ -35,9 +35,9 @@ let http = require("http").Server(app);
 let io = require("socket.io")(http);
 
 //SocketIO connection Event
-io.on("connection",(socket:any)=>{
+io.on("connection", (socket:any) => {
     console.log("A SocketIO client got Connected!");
-})
+});
 
 /**
  * Start Express server.
