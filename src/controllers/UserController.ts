@@ -95,9 +95,9 @@ class UserController {
             const userService = new UserService();
             userService.loginUser(userCredentials, (error , result) => {
                 if (error) {
-                    res.send(error);
+                    res.status(403).send(error);
                 } else {
-                    res.send(result);
+                    res.status(200).send(result);
                 }
             });
         } catch (e) {
