@@ -96,9 +96,9 @@ class OrganizerController {
             const organizerService = new OrganizerService();
             organizerService.loginOrganizer(organizerCredentials, (error , result) => {
                 if (error) {
-                    res.send(error);
+                    res.status(401).send(error);
                 } else {
-                    res.send(result);
+                    res.status(200).send(result);
                 }
             });
         } catch (e) {
