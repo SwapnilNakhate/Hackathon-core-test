@@ -1,5 +1,5 @@
-import UserSchema = require("../schemas/UserSchema");
-import User = require("./../mongoose/user");
+import UserSchema = require("../schemas/userSchema");
+import User = require("./../mongoose/User");
 
 import RepositoryBase = require("./base/repository.base");
 

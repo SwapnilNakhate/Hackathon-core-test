@@ -1,6 +1,6 @@
 import {Schema} from "mongoose";
 import Team = require("../mongoose/Team");
-import DataAccess = require("./../dataaccess");
+import DataAccess = require("./../dataAccess");
 
 const mongoose = DataAccess.mongooseInstance;
 const mongooseConnection = DataAccess.mongooseConnection;
