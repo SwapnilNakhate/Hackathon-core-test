@@ -56,6 +56,22 @@ class PrizeController {
         }
     }
 
+    public getAllPrizesByEventId(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            const prizeService = new PrizeService();
+            const eventId= req.params.eventId;
+            prizeService.getAllPrizeDataByEventId(eventId, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            console.log("Exception in getting all Prize Data by event id . ", e);
+        }
+    }
+
     public updatePrize(req: express.Request, res: express.Response, next: express.NextFunction): void {
         try {
             const prizeId = req.params.id;

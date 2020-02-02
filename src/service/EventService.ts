@@ -12,6 +12,7 @@ class EventService {
     }
 
     public createEventData(event: Event, callback: (error: any, response: any) => void) {
+        event.status = "scheduled";
         this.eventRepository.create(event, (error, result) => {
             if (error) {
                 callback(error, null);

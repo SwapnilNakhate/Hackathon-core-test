@@ -13,6 +13,7 @@ class PrizeRoutes {
     get routes(): express.Router {
         router.post("/", this.prizeController.createPrize);
         router.get("/", this.prizeController.getAllPrizes);
+        router.get("/event/:eventId", this.prizeController.getAllPrizesByEventId);
         router.get("/:id", this.prizeController.getPrizeById);
         router.put("/:id", this.prizeController.updatePrize);
         router.delete("/:id", this.prizeController.deletePrizeById);

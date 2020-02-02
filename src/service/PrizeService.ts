@@ -41,6 +41,16 @@ class PrizeService {
         });
     }
 
+    public getAllPrizeDataByEventId(evntId:any, callback: (error: any, response: any) => void) {
+        this.prizeRepository.retrieve({eventId: evntId}, (error, result) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
     public updatePrizeData(prizeId: any, updatedPrize: Prize, callback: (error: any, response: any) => void) {
         const updateQuery = { _id : prizeId };
         this.prizeRepository.update(updateQuery, updatedPrize, {new: true}, (error, result) => {
