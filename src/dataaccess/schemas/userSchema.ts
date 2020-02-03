@@ -25,6 +25,21 @@ class UserSchema {
                 teamId : {
                     type: Schema.Types.ObjectId,
                     ref: 'Team'
+                },
+                contactNumber : {
+                    type: String
+                },
+                gitId : {
+                    type: String
+                },
+                designation : {
+                    type: String
+                },
+                image : {
+                    type: String
+                },
+                tShirtSize : {
+                    type: String
                 }
             },
             {
