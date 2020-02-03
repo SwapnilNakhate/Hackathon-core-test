@@ -8,7 +8,7 @@ spec:
     metadata:
       labels:
         app: hackathon-app
-  replicas: 2 
+  replicas: 1 
   template: # create pods using pod definition in this template
     metadata:
       labels:
@@ -22,7 +22,7 @@ spec:
             requests:
                 cpu: 500m
             limits:
-                cpu: 2
+                cpu: .5
         ports:
           - containerPort: 3160
         env:

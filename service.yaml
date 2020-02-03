@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hackathon-service
+spec:
+#  clusterIP: 100.65.96.55
+  ports:
+    - port: 3160
+      targetPort: 3160
+      nodePort: 30160
+  type: NodePort
+  selector:
+    app: hackathon-app
+  type: LoadBalancer
+---

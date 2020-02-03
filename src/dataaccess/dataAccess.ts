@@ -17,7 +17,13 @@ class DataAccess {
             console.log("Connected to mongodb.");
         });
         Mongoose.set("debug", true);
-        const dbURL = "mongodb://127.0.0.1:27017/" + dbConfig;
+        var dbURL;// = "mongodb://sbr-devp-129:27017/" + dbConfig;
+        if(process.env.pathToMongoDb != null) {
+            
+            dbURL = process.env.pathToMongoDb;
+        } else {
+            dbURL = "mongodb://sbr-devp-129:27017/" + dbConfig;
+        }
         this.mongooseInstance = Mongoose.connect(dbURL, { useNewUrlParser: true });
         return this.mongooseInstance;
     }

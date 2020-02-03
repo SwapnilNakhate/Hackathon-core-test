@@ -1,5 +1,5 @@
 import * as express from "express";
-import * as socketio from "socket.io";
+//import * as socketio from "socket.io";
 import Middlewares = require("./dataaccess/middlewares/base/MiddlewaresBase");
 import BaseRoutes = require("./routes");
 import { configure, getLogger } from 'log4js';
@@ -35,9 +35,9 @@ let http = require("http").Server(app);
 let io = require("socket.io")(http);
 
 //SocketIO connection Event
-io.on("connection", (socket:any) => {
-    console.log("A SocketIO client got Connected!");
-});
+//io.on("connection",(socket:any)=>{
+//   console.log("A SocketIO client got Connected!");
+//})
 
 /**
  * Start Express server.

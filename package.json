@@ -13,6 +13,7 @@
   "author": "Swapnil Nakhate",
   "license": "ISC",
   "dependencies": {
+    "@babel/code-frame": "^7.8.3",
     "@types/compression": "0.0.36",
     "@types/config": "0.0.36",
     "@types/cors": "^2.8.4",
