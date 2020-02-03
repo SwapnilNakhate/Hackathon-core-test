@@ -1,0 +1,34 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: hackathon-deployment
+spec:
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: hackathon-app
+  replicas: 2 
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: hackathon-app
+    spec:
+     containers:
+      - name: hackathon-image
+        image: boxoffice.azurecr.io/hackathon:latest-qa
+        imagePullPolicy: Always
+        resources:
+            requests:
+                cpu: 500m
+            limits:
+                cpu: 2
+        ports:
+          - containerPort: 3160
+        env:
+        - name: pathToMongoDb
+          value: mongodb://amaresh15:Ami1982#@qadbcluster-shard-00-00-1hsyg.azure.mongodb.net:27017,qadbcluster-shard-00-01-1hsyg.azure.mongodb.net:27017,qadbcluster-shard-00-02-1hsyg.azure.mongodb.net:27017/test?ssl=true&replicaSet=QADBcluster-shard-0&authSource=admin&retryWrites=true&w=majority
+
+     imagePullSecrets:
+      - name: dmrsecret
+
