@@ -121,9 +121,9 @@ class EventController {
             const eventService = new EventService();
             eventService.enrollForEvent(eventId, teamId, (error , result) => {
                 if (error) {
-                    res.send(error);
+                    res.status(403).send(error);
                 } else {
-                    res.send(result);
+                    res.status(200).send(result);
                 }
             });
         } catch (e) {
@@ -148,6 +148,22 @@ class EventController {
         }
     }
 
+    public getAllEnrolledEventsByTeamId(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            logger.debug("Get all Events for a team");
+            const teamId = req.params.teamId;
+            const eventService = new EventService();
+            eventService.getAllEnrolledEventsByTeamId(teamId, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            logger.error("Exception in getting all Event Data . ", e);
+        }
+    }
     public evaluateEventById(req: express.Request, res: express.Response, next: express.NextFunction): void {
         try {
             logger.debug("Get all Events");

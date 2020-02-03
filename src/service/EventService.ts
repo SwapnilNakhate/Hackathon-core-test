@@ -75,6 +75,16 @@ class EventService {
             }
         });
     }
+    public getAllEnrolledEventsByTeamId(temId: any, callback: (error: any, response: any) => void) {
+        const findQuery = { "teams._id" : temId };
+        this.eventRepository.retrieve(findQuery, (err, result) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
 
     public enrollForEvent(eventId: any, temId: any, callback: (error: any, response: any) => void) {
         const findQuery = { _id: eventId, "teams._id" : temId };
@@ -109,6 +119,7 @@ class EventService {
             }
         });
     }
+
     public deleteEventById(eventId: any, callback: (error: any, response: any) => void) {
         const updateQuery = { _id : eventId };
         this.eventRepository.deleteById(updateQuery, (error, result) => {
