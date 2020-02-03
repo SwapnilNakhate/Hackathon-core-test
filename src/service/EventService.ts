@@ -38,6 +38,15 @@ class EventService {
             if (error) {
                 callback(error, null);
             } else {
+                for(let event of result) {
+                    if(event) {
+                        let currentDate = new Date();
+                        let endDate = new Date(event.endDateTime);
+                        if(endDate.getTime() < currentDate.getTime()) {
+                            event.status = "completed";
+                        }
+                    }
+                }
                 callback(null, result);
             }
         });

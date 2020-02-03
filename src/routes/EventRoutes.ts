@@ -18,6 +18,7 @@ class EventRoutes {
         router.get("/:id/team", this.eventController.getAllTeamsByEventId);
         router.get("/organizer/:organizerId", this.eventController.getAllEventByOrganizerId);
         router.get("/:id/evaluate", this.eventController.evaluateEventById);
+        router.get("/:id/publish", this.eventController.evaluateEventById);
         router.put("/enroll", this.eventController.enrollForEvent);
         router.put("/updateStatus", this.eventController.enrollForEvent);
         router.put("/:id", this.eventController.updateEvent);
