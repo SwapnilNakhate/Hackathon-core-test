@@ -56,6 +56,22 @@ class UserController {
         }
     }
 
+    public searchUsersWithEmail(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            const userService = new UserService();
+            let searchText = req.body.searchText;
+            userService.searchUsersWithEmail(searchText, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            console.log("Exception in getting all User Data . ", e);
+        }
+    }
+
     public updateUser(req: express.Request, res: express.Response, next: express.NextFunction): void {
         try {
             const userId = req.params.id;

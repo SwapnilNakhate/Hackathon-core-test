@@ -47,6 +47,17 @@ class UserService {
         });
     }
 
+    public searchUsersWithEmail(searchText: string, callback: (error: any, response: any) => void) {
+        let searchQuery = { email : {$regex : "^" + searchText} };
+        this.userRepository.retrieve(searchQuery, (error, result) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
     public updateUserData(userId: any, updatedUser: User, callback: (error: any, response: any) => void) {
         const updateQuery = { _id : userId };
         this.userRepository.update(updateQuery, updatedUser, {new: true}, (error, result) => {
