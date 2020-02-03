@@ -17,7 +17,7 @@ class DataAccess {
             console.log("Connected to mongodb.");
         });
         Mongoose.set("debug", true);
-        var dbURL;// = "mongodb://sbr-devp-129:27017/" + dbConfig;
+        let dbURL;// = "mongodb://sbr-devp-129:27017/" + dbConfig;
         if(process.env.pathToMongoDb != null) {
             
             dbURL = process.env.pathToMongoDb;
