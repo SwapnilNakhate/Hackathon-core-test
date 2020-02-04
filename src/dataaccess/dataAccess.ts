@@ -22,7 +22,7 @@ class DataAccess {
             
             dbURL = process.env.pathToMongoDb;
         } else {
-            dbURL = "mongodb://sbr-devp-129:27017/" + dbConfig;
+            dbURL = "mongodb://localhost:27017/" + dbConfig;
         }
         this.mongooseInstance = Mongoose.connect(dbURL, { useNewUrlParser: true });
         return this.mongooseInstance;

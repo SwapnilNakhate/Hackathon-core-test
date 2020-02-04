@@ -1,14 +1,19 @@
 import Event = require("../dataaccess/mongoose/Event");
 import EventRepository = require("../dataaccess/repository/EventRepository");
+import TeamRepository = require("../dataaccess/repository/TeamRepository");
 import { getLogger } from 'log4js';
+const request = require('request');
+import config = require("config");
 const logger = getLogger("Event Service");
 
 class EventService {
 
     private eventRepository: EventRepository;
+    private teamRepository: TeamRepository;
 
     constructor() {
         this.eventRepository = new EventRepository();
+        this.teamRepository = new TeamRepository();
     }
 
     public createEventData(event: Event, callback: (error: any, response: any) => void) {
@@ -102,22 +107,28 @@ class EventService {
                 callback(err, null);
             } else {
                 if(result.length === 0) {
-                    const eventFindQuery = { _id: eventId};
-                    let team = {
-                        _id: temId,
-                        repoLink : "",
-                        coding_standards: 0,
-                        creativity: 0,
-                        usablity: 0,
-                        ui_ux: 0,
-                        functionalCompleteness: 0,
-                    };
-                    const updatedEvent = { $push : { teams : team }};
-                    this.eventRepository.update(eventFindQuery, updatedEvent, {new: true}, (errStack, data) => {
-                        if (errStack) {
-                            callback(errStack, null);
-                        } else {
-                            callback(null, data);
+                    this.getTeamDetails(temId, (errorStack: any, data: any) => {
+                        if(err) {
+                            callback(err, null);
+                        } else if(data) {
+                            const eventFindQuery = { _id: eventId};
+                            let team = {
+                                _id: temId,
+                                repoLink : data.html_url ? data.html_url : '',
+                                coding_standards: 0,
+                                creativity: 0,
+                                usablity: 0,
+                                ui_ux: 0,
+                                functionalCompleteness: 0,
+                            };
+                            const updatedEvent = { $push : { teams : team }};
+                            this.eventRepository.update(eventFindQuery, updatedEvent, {new: true}, (errStack, dataResponse) => {
+                                if (errStack) {
+                                    callback(errStack, null);
+                                } else {
+                                    callback(null, dataResponse);
+                                }
+                            });
                         }
                     });
                 } else {
@@ -125,6 +136,52 @@ class EventService {
                     errorMessage.message = "You have already applied for his event.";
                     callback(errorMessage, null);
                 }
+            }
+        });
+    }
+
+    public createRepoForATeam(teamName: any, membersGitIds: any, callback: (error: any, response: any) => void) {
+        let requestBody = {
+            "name": teamName,
+            "description": "This is your Hackthon repo.",
+            "private": false,
+            "reponame": "ashish9308/"+teamName,
+            "userlist" : membersGitIds
+        };
+        let gitHubAPIURL = config.get("githubAPI");
+        request({
+            url: gitHubAPIURL + "createrepo",
+            method: "POST",
+            json: true,
+            body: requestBody
+        }, (error: any, response: any, body: any) => {
+            if(error) {
+                callback(error, null);
+            } else if(body) {
+                callback(null, body);
+            }
+        });
+
+    }
+
+    public getTeamDetails(teamId: any, callback: (error: any, response: any) => void) {
+        let findQuery = { _id: teamId };
+        this.teamRepository.retrieveWithPopulate(findQuery, 'members', (errStack, data) => {
+            if (errStack) {
+                callback(errStack, null);
+            } else {
+                let currentDate = new Date();
+                let teamName = data[0].name + currentDate.getTime();
+                let membersList = data[0].members;
+                let memberGitIds = membersList.map((a: any) => a.gitId);
+                console.log('memberGitIds : '+ memberGitIds);
+                this.createRepoForATeam(teamName, memberGitIds, (err, response) => {
+                    if(err) {
+                        callback(err, null);
+                    } else if(response) {
+                        callback(null, response);
+                    }
+                });
             }
         });
     }
