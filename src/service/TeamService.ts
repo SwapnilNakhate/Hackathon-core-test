@@ -33,7 +33,7 @@ class TeamService {
 
     public getTeamByUserId(userId: any, callback: (error: any, response: any) => void) {
         let query = { members: { $in: [ userId ] } };
-        this.teamRepository.retrieve(query, (error, result) => {
+        this.teamRepository.retrieveWithPopulate(query, 'members', (error, result) => {
             if (error) {
                 callback(error, null);
             } else {
