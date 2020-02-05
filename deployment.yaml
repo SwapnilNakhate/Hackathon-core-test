@@ -15,6 +15,17 @@ spec:
         app: hackathon-app
     spec:
      containers:
+     - name: gitprofilews-image
+        image: boxoffice.azurecr.io/gitprofilews:latest-qa
+        imagePullPolicy: Always
+        resources:
+            requests:
+                cpu: 500m
+            limits:
+                cpu: .5
+        ports:
+          - containerPort: 3000
+          
       - name: hackathon-image
         image: boxoffice.azurecr.io/hackathon:latest-qa
         imagePullPolicy: Always
