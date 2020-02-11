@@ -218,6 +218,54 @@ class EventService {
             }
         });
     }
+
+    public startOrCancelEvent(callback: (error: any, response: any) => void) {
+        let currentDateTime = new Date();
+        this.startEvent(currentDateTime);
+        this.cancelEvent(currentDateTime);
+    }
+
+    public startEvent(currentDateTime: any) {
+        let nextCurrentDateTime = new Date();
+        nextCurrentDateTime.setMinutes(nextCurrentDateTime.getMinutes() + 1);
+        console.log('currentDateTime : '+currentDateTime);
+        console.log('nextCurrentDateTime : '+nextCurrentDateTime);
+        const query = {
+            startDateTime : {
+                $gte : currentDateTime,
+                $lte : nextCurrentDateTime
+            },
+            status : "scheduled"
+        };
+        const populateQuery = { path: 'teams._id', model: 'Team'};
+        this.eventRepository.retrieveWithPopulate(query, populateQuery, (error, result) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.log('Starting this events.');
+                console.log(result);
+            }
+        });
+    }
+
+    public cancelEvent(currentDateTime: any) {
+        const query = {
+            endDateTime : {
+                $lte : currentDateTime
+            },
+            status : "scheduled"
+        };
+        const populateQuery = { path: 'teams._id', model: 'Team'};
+        this.eventRepository.retrieveWithPopulate(query, populateQuery, (error, result) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.log('Cancelling this events.');
+                // console.log(result);
+            }
+        });
+    }
+
 }
 
 Object.seal(EventService);

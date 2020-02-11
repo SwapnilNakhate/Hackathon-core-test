@@ -180,6 +180,22 @@ class EventController {
             logger.error("Exception in getting all Event Data . ", e);
         }
     }
+
+    public startOrCancelEvents() {
+        try {
+            logger.debug("Checking all Events date time");
+            const eventService = new EventService();
+            eventService.startOrCancelEvent((error , result) => {
+                if (error) {
+                    logger.error("Error in start Or Cancel Event.");
+                } else {
+                    logger.debug("Start Or Cancel Event success.");
+                }
+            });
+        } catch (e) {
+            logger.error("Exception in getting all Event Data . ", e);
+        }
+    }
 }
 
 export = EventController;

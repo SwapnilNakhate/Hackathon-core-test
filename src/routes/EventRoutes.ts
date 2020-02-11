@@ -8,6 +8,8 @@ class EventRoutes {
 
     constructor() {
         this.eventController = new EventController();
+        // console.log('Event registered');
+        // this.eventController.startOrCancelEvents();
     }
 
     get routes(): express.Router {
