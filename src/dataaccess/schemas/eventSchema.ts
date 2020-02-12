@@ -35,10 +35,10 @@ class EventSchema {
                     type: Number
                 },
                 startDateTime: {
-                    type: String
+                    type: Date
                 },
                 endDateTime: {
-                    type: String
+                    type: Date
                 },
                 status: {
                     type: String

@@ -221,46 +221,41 @@ class EventService {
 
     public startOrCancelEvent(callback: (error: any, response: any) => void) {
         let currentDateTime = new Date();
+        console.log('currentDateTime : '+currentDateTime);
         this.startEvent(currentDateTime);
-        this.cancelEvent(currentDateTime);
+        this.completeEvent(currentDateTime);
     }
 
     public startEvent(currentDateTime: any) {
-        let nextCurrentDateTime = new Date();
-        nextCurrentDateTime.setMinutes(nextCurrentDateTime.getMinutes() + 1);
-        console.log('currentDateTime : '+currentDateTime);
-        console.log('nextCurrentDateTime : '+nextCurrentDateTime);
         const query = {
             startDateTime : {
-                $gte : currentDateTime,
-                $lte : nextCurrentDateTime
+                $lte : currentDateTime
             },
-            status : "scheduled"
+            status :"scheduled"
         };
-        const populateQuery = { path: 'teams._id', model: 'Team'};
-        this.eventRepository.retrieveWithPopulate(query, populateQuery, (error, result) => {
+        const updatedBody = { status: 'ongoing' };
+        this.eventRepository.updateMany(query, updatedBody, { multi: true }, (error, result) => {
             if (error) {
                 console.error(error);
             } else {
-                console.log('Starting this events.');
-                console.log(result);
+                console.log('Events started');
             }
         });
     }
 
-    public cancelEvent(currentDateTime: any) {
+    public completeEvent(currentDateTime: any) {
         const query = {
             endDateTime : {
                 $lte : currentDateTime
             },
-            status : "scheduled"
+            status : "ongoing"
         };
-        const populateQuery = { path: 'teams._id', model: 'Team'};
-        this.eventRepository.retrieveWithPopulate(query, populateQuery, (error, result) => {
+        const updatedBody = { status : "completed" };
+        this.eventRepository.updateMany(query, updatedBody, {multi : true}, (error, result) => {
             if (error) {
                 console.error(error);
             } else {
-                console.log('Cancelling this events.');
+                console.log('Events completed');
                 // console.log(result);
             }
         });

@@ -1,5 +1,6 @@
 import express = require("express");
 import EventController = require("../controllers/EventController");
+const schedule = require('node-schedule');
 const router = express.Router();
 
 class EventRoutes {
@@ -8,8 +9,9 @@ class EventRoutes {
 
     constructor() {
         this.eventController = new EventController();
-        // console.log('Event registered');
-        // this.eventController.startOrCancelEvents();
+        schedule.scheduleJob('*/1 * * * *', () => {
+            this.eventController.startOrCancelEvents();
+        });
     }
 
     get routes(): express.Router {
