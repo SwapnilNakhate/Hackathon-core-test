@@ -11,16 +11,20 @@ class UserSchema {
         const user = new Schema({
                 email: {
                     type: String,
-                    unique: true
+                    unique: true,
+                    required: true
                 },
                 firstName: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 lastName: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 password : {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 teamId : {
                     type: Schema.Types.ObjectId,
@@ -30,10 +34,12 @@ class UserSchema {
                     type: String
                 },
                 gitId : {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 designation : {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 image : {
                     type: String

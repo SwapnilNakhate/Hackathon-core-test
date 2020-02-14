@@ -11,13 +11,16 @@ class OrganizerSchema {
         const organizer = new Schema({
                 email: {
                     type: String,
-                    unique: true
+                    unique: true,
+                    required: true
                 },
                 password: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 name: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 organization: {
                     type: String

@@ -1,44 +1,41 @@
 import {Schema} from "mongoose";
-import Prize = require("../mongoose/Prize");
+import Organizer = require("../mongoose/Organizer");
 import DataAccess = require("./../dataAccess");
 
 const mongoose = DataAccess.mongooseInstance;
 const mongooseConnection = DataAccess.mongooseConnection;
 
-class PrizeSchema {
+class OrganizerSchema {
     static get schema() {
 
-        const prize = new Schema({
-                rank: {
-                    type: Number,
+        const organizer = new Schema({
+                email: {
+                    type: String,
+                    unique: true,
                     required: true
                 },
-                title: {
+                password: {
                     type: String,
                     required: true
                 },
-                description: {
-                    type: String
-                },
-                amount: {
-                    type: Number,
-                    required: true
-                },
-                eventId: {
+                name: {
                     type: String,
                     required: true
                 },
-                winnerTeamID: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'Team' 
+                specialization: {
+                    type: String,
+                    required: true
+                },
+                contactNo : {
+                    type: Number
                 }
             },
             {
                 timestamps: true,
                 versionKey: false
             });
-        return prize;
+        return organizer;
     }
 }
-const prizeSchema = mongooseConnection.model<Prize>("Prize", PrizeSchema.schema);
-export = prizeSchema;
+const organizerSchema = mongooseConnection.model<Organizer>("Organizer", OrganizerSchema.schema);
+export = organizerSchema;

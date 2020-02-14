@@ -10,38 +10,43 @@ class EventSchema {
 
         const event = new Schema({
                 name: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 shortDescription: {
                     type: String
                 },
                 organizerId: {
                     type: Schema.Types.ObjectId,
-                    ref: 'Organizer' 
+                    ref: 'Organizer',
+                    required: true
                 },
                 logo: {
                     type: String
                 },
                 problemStatement: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 rulesAndRegulations : {
-                    type: String
-                },
-                winnerTeamId: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 maxTeamSize: {
-                    type: Number
+                    type: Number,
+                    required: true
                 },
                 startDateTime: {
-                    type: Date
+                    type: Date,
+                    required: true
                 },
                 endDateTime: {
-                    type: Date
+                    type: Date,
+                    required: true
                 },
                 status: {
-                    type: String
+                    type: String,
+                    required: true
                 },
                 prizes :  [{ type: Schema.Types.ObjectId, ref: 'Prize' }],
                 teams :  [{
