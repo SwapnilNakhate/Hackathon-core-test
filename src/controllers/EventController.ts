@@ -78,6 +78,22 @@ class EventController {
         }
     }
 
+    public getAllActiveEvents(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            logger.debug("Get all active Events");
+            const eventService = new EventService();
+            eventService.getAllActiveEvents((error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            logger.error("Exception in getting all Event Data . ", e);
+        }
+    }
+
     public updateEvent(req: express.Request, res: express.Response, next: express.NextFunction): void {
         try {
             logger.debug("Update Event by Id");

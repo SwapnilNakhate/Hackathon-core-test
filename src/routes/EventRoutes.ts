@@ -17,6 +17,7 @@ class EventRoutes {
     get routes(): express.Router {
         router.post("", this.eventController.createEvent);
         router.get("/", this.eventController.getAllEvents);
+        router.get("/active", this.eventController.getAllActiveEvents);
         router.get("/:id", this.eventController.getEventById);
         router.get("/team/:teamId", this.eventController.getAllEnrolledEventsByTeamId);
         router.get("/:id/team", this.eventController.getAllTeamsByEventId);

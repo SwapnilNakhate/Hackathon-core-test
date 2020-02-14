@@ -67,6 +67,17 @@ class EventService {
         });
     }
 
+    public getAllActiveEvents(callback: (error: any, response: any) => void) {
+        const query =  { $or: [ { status: 'scheduled' }, { status: 'ongoing' } ] };
+        this.eventRepository.retrieveWithPopulate(query, 'prizes', (error, result) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
     public getAllTeamsByEventId(eventId: any, callback: (error: any, response: any) => void) {
         const query = { _id: eventId };
         const populateQuery = { path: 'teams._id', model: 'Team'};
