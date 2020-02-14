@@ -8,16 +8,19 @@ const mongooseConnection = DataAccess.mongooseConnection;
 class TeamSchema {
     static get schema() {
 
-        const user = new Schema({
+        const team = new Schema({
                 name: {
-                    type: String
+                    type: String,
+                    unique : true,
+                    required: true
                 },
                 tagline: {
                     type: String
                 },
                 teamLeaderId: {
                     type: Schema.Types.ObjectId,
-                    ref: 'User'
+                    ref: 'User',
+                    required: true
                 },
                 members: [{
                     type: Schema.Types.ObjectId,
@@ -32,7 +35,7 @@ class TeamSchema {
                 timestamps: true,
                 versionKey: false
             });
-        return user;
+        return team;
     }
 }
 const teamSchema = mongooseConnection.model<Team>("Team", TeamSchema.schema);
