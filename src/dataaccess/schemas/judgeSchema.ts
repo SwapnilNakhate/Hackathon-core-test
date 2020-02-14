@@ -1,14 +1,14 @@
 import {Schema} from "mongoose";
-import Organizer = require("../mongoose/Organizer");
+import Judge = require("../mongoose/Judge");
 import DataAccess = require("./../dataAccess");
 
 const mongoose = DataAccess.mongooseInstance;
 const mongooseConnection = DataAccess.mongooseConnection;
 
-class OrganizerSchema {
+class JudgeSchema {
     static get schema() {
 
-        const organizer = new Schema({
+        const judge = new Schema({
                 email: {
                     type: String,
                     unique: true,
@@ -34,8 +34,8 @@ class OrganizerSchema {
                 timestamps: true,
                 versionKey: false
             });
-        return organizer;
+        return judge;
     }
 }
-const organizerSchema = mongooseConnection.model<Organizer>("Organizer", OrganizerSchema.schema);
-export = organizerSchema;
+const judgeSchema = mongooseConnection.model<Judge>("Judge", JudgeSchema.schema);
+export = judgeSchema;
