@@ -46,7 +46,10 @@ class UserSchema {
                 },
                 tShirtSize : {
                     type: String
-                }
+                },
+                dob : {
+                    type: String
+                },
             },
             {
                 timestamps: true,

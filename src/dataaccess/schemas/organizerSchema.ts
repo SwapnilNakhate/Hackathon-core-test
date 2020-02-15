@@ -31,6 +31,9 @@ class OrganizerSchema {
                 contactNo : {
                     type: Number
                 },
+                dob : {
+                    type: String
+                },
                 events : [{
                     type: Schema.Types.ObjectId,
                     ref: 'Event' 

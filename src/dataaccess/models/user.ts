@@ -9,6 +9,7 @@ class User {
     public designation: string;
     public image: string;
     public tShirtSize: string;
+    public dob: string;
 
     constructor() {}
 }
