@@ -164,6 +164,23 @@ class EventController {
         }
     }
 
+    public getAllEventsByJudgeId(req: express.Request, res: express.Response, next: express.NextFunction): void {
+        try {
+            logger.debug("Get all Events by judgeId");
+            const judgeId = req.params.judgeId;
+            const eventService = new EventService();
+            eventService.getAllEventsByJudgeId(judgeId, (error , result) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(result);
+                }
+            });
+        } catch (e) {
+            logger.error("Exception in getting all Event by jdueg id . ", e);
+        }
+    }
+
     public getAllEnrolledEventsByTeamId(req: express.Request, res: express.Response, next: express.NextFunction): void {
         try {
             logger.debug("Get all Events for a team");

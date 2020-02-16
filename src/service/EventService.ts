@@ -90,6 +90,18 @@ class EventService {
         });
     }
 
+    public getAllEventsByJudgeId(judgeId: any, callback: (error: any, response: any) => void) {
+        const query = { 'evaluationConfiguration.judge': judgeId, status: 'completed' };
+        const populateQuery = { path: 'teams._id', model: 'Team'};
+        this.eventRepository.retrieveWithPopulate(query, populateQuery, (error, result) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
     public updateEventData(eventId: any, updatedEvent: Event, callback: (error: any, response: any) => void) {
         const updateQuery = { _id : eventId };
         this.eventRepository.update(updateQuery, updatedEvent, {new: true}, (error, result) => {

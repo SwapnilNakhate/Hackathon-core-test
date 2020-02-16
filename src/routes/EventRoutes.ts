@@ -20,6 +20,7 @@ class EventRoutes {
         router.get("/active", this.eventController.getAllActiveEvents);
         router.get("/:id", this.eventController.getEventById);
         router.get("/team/:teamId", this.eventController.getAllEnrolledEventsByTeamId);
+        router.get("/judge/:judgeId", this.eventController.getAllEventsByJudgeId);
         router.get("/:id/team", this.eventController.getAllTeamsByEventId);
         router.get("/organizer/:organizerId", this.eventController.getAllEventByOrganizerId);
         router.get("/:id/evaluate", this.eventController.evaluateEventById);
