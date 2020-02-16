@@ -13,6 +13,8 @@ class Event {
     public rulesAndRegulations: string;
     public winnerTeamId: string;
     public status: string;
+    public difficulty: string;
+    public technologies: [any];
     public evaluationConfiguration: [evaluationConfigurationModel];
 
     constructor() {}

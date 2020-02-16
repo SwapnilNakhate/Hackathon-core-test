@@ -44,10 +44,14 @@ class EventSchema {
                     type: Date,
                     required: true
                 },
+                difficulty : {
+                    type: String
+                },
                 status: {
                     type: String,
                     required: true
                 },
+                technologies: [],
                 teams :  [{
                     teamId: { type: Schema.Types.ObjectId, ref: 'Team' },
                     repoLink: { type: String },
