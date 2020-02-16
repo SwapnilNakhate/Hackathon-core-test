@@ -43,15 +43,6 @@ class EventService {
             if (error) {
                 callback(error, null);
             } else {
-                for(let event of result) {
-                    if(event) {
-                        let currentDate = new Date();
-                        let endDate = new Date(event.endDateTime);
-                        if(endDate.getTime() < currentDate.getTime()) {
-                            event.status = "completed";
-                        }
-                    }
-                }
                 callback(null, result);
             }
         });
@@ -130,19 +121,16 @@ class EventService {
                 callback(err, null);
             } else {
                 if(result.length === 0) {
-                    this.getTeamDetails(temId, (errorStack: any, data: any) => {
+                    const findEventById = { _id : eventId };
+                    this.eventRepository.retrieveOne(findEventById, (err, result) => {
                         if(err) {
                             callback(err, null);
-                        } else if(data) {
+                        } else if(result) {
                             const eventFindQuery = { _id: eventId};
                             let team = {
                                 _id: temId,
-                                repoLink : data.html_url ? data.html_url : '',
-                                coding_standards: 0,
-                                creativity: 0,
-                                usablity: 0,
-                                ui_ux: 0,
-                                functionalCompleteness: 0,
+                                repoLink : '',
+                                evaluations : result.evaluationConfiguration
                             };
                             const updatedEvent = { $push : { teams : team }};
                             this.eventRepository.update(eventFindQuery, updatedEvent, {new: true}, (errStack, dataResponse) => {
@@ -151,9 +139,16 @@ class EventService {
                                 } else {
                                     callback(null, dataResponse);
                                 }
-                            });
+                            });        
                         }
                     });
+                    // this.getTeamDetails(temId, (errorStack: any, data: any) => {
+                    //     if(err) {
+                    //         callback(err, null);
+                    //     } else if(data) {
+                            
+                    //     }
+                    // });
                 } else {
                     let errorMessage = new Error();
                     errorMessage.message = "You have already applied for his event.";
