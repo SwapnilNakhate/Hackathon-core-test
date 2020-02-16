@@ -57,7 +57,10 @@ class EventSchema {
                     ui_ux: { type: Number, default: 0 },
                     functionalCompleteness: { type: Number, default: 0 },
                     finalScore: { type: Number, default: 0 }
-                }]
+                }],
+                evaluationConfiguration : {
+                    type: Array
+                }
             },
             {
                 timestamps: true,

@@ -1,4 +1,5 @@
-import prizeModel = require("./../models/prize");
+import prizeModel = require("./prize");
+import evaluationConfigurationModel = require("./evaluationConfiguration");
 
 class Event {
 
@@ -14,6 +15,7 @@ class Event {
     public winnerTeamId: string;
     public status: string;
     public prizes : [prizeModel];
+    public evaluationConfiguration: [evaluationConfigurationModel];
 
     constructor() {}
 

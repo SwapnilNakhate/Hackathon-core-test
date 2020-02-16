@@ -22,6 +22,10 @@ class JudgeSchema {
                     type: String,
                     required: true
                 },
+                createdBy: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Organizer' 
+                },
                 specialization: {
                     type: String,
                     required: true
