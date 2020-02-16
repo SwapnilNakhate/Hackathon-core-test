@@ -122,33 +122,32 @@ class EventService {
             } else {
                 if(result.length === 0) {
                     const findEventById = { _id : eventId };
-                    this.eventRepository.retrieveOne(findEventById, (err, result) => {
-                        if(err) {
-                            callback(err, null);
-                        } else if(result) {
-                            const eventFindQuery = { _id: eventId};
-                            let team = {
-                                _id: temId,
-                                repoLink : '',
-                                evaluations : result.evaluationConfiguration
-                            };
-                            const updatedEvent = { $push : { teams : team }};
-                            this.eventRepository.update(eventFindQuery, updatedEvent, {new: true}, (errStack, dataResponse) => {
-                                if (errStack) {
-                                    callback(errStack, null);
-                                } else {
-                                    callback(null, dataResponse);
+                    this.eventRepository.retrieveOne(findEventById, (getEventError, eventData) => {
+                        if(getEventError) {
+                            callback(getEventError, null);
+                        } else if(eventData) {
+                            this.getTeamDetails(temId, (errorStack: any, data: any) => {
+                                if(errorStack) {
+                                    callback(errorStack, null);
+                                } else if(data) {
+                                    const eventFindQuery = { _id: eventId};
+                                    let team = {
+                                        _id: temId,
+                                        repoLink : data.html_url ? data.html_url : '',
+                                        evaluations : eventData.evaluationConfiguration
+                                    };
+                                    const updatedEvent = { $push : { teams : team }};
+                                    this.eventRepository.update(eventFindQuery, updatedEvent, {new: true}, (errStack, dataResponse) => {
+                                        if (errStack) {
+                                            callback(errStack, null);
+                                        } else {
+                                            callback(null, dataResponse);
+                                        }
+                                    });
                                 }
-                            });        
+                            });                                            
                         }
                     });
-                    // this.getTeamDetails(temId, (errorStack: any, data: any) => {
-                    //     if(err) {
-                    //         callback(err, null);
-                    //     } else if(data) {
-                            
-                    //     }
-                    // });
                 } else {
                     let errorMessage = new Error();
                     errorMessage.message = "You have already applied for his event.";
