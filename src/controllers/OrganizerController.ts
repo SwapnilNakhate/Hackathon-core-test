@@ -20,12 +20,12 @@ class OrganizerController {
                     res.send(error);
                 } else {
                     groupId = result.id;
-                    organizerService.createOrganizerData(organizer, groupId, (error , result) => {
-                        if (error) {
-                            res.send(error);
+                    organizerService.createOrganizerData(organizer, groupId, (error1 , result1) => {
+                        if (error1) {
+                            res.send(error1);
                         } else {
-                            console.log(result)
-                            res.send(result);
+                            console.log(result1);
+                            res.send(result1);
                         }
                     });
                 }                

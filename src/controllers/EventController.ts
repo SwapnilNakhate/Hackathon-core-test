@@ -21,11 +21,11 @@ class EventController {
                     res.send(error);
                 } else {
                     let nameSpaceId = result.id;
-                    eventService.createEventData(event, nameSpaceId, (error , result) => {
-                        if (error) {
-                            res.send(error);
+                    eventService.createEventData(event, nameSpaceId, (error1 , result1) => {
+                        if (error1) {
+                            res.send(error1);
                         } else {
-                            res.send(result);
+                            res.send(result1);
                         }
                     });
                 }
@@ -149,11 +149,11 @@ class EventController {
                     res.status(403).send(error);
                 } else {
                     let repoLink = result.http_url_to_repo;
-                    eventService.enrollForEvent(eventId, teamId, repoLink, (error , result) => {
-                        if (error) {
-                            res.status(403).send(error);
+                    eventService.enrollForEvent(eventId, teamId, repoLink, (error1 , result1) => {
+                        if (error1) {
+                            res.status(403).send(error1);
                         } else {
-                            res.status(200).send(result);
+                            res.status(200).send(result1);
                         }
                     });
                 }
