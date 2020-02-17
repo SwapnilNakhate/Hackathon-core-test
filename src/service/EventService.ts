@@ -16,8 +16,9 @@ class EventService {
         this.teamRepository = new TeamRepository();
     }
 
-    public createEventData(event: Event, callback: (error: any, response: any) => void) {
+    public createEventData(event: Event, nameSpaceId: any, callback: (error: any, response: any) => void) {
         event.status = "scheduled";
+        event.nameSpaceId = nameSpaceId;
         this.eventRepository.create(event, (error, result) => {
             if (error) {
                 callback(error, null);
@@ -114,7 +115,7 @@ class EventService {
         });
     }
 
-    public enrollForEvent(eventId: any, temId: any, callback: (error: any, response: any) => void) {
+    public enrollForEvent(eventId: any, temId: any, repoLink :any, callback: (error: any, response: any) => void) {
         const findQuery = { _id: eventId, "teams._id" : temId };
         this.eventRepository.retrieve(findQuery, (err, result) => {
             if (err) {
@@ -133,7 +134,7 @@ class EventService {
                                     const eventFindQuery = { _id: eventId};
                                     let team = {
                                         _id: temId,
-                                        repoLink : data.html_url ? data.html_url : '',
+                                        repoLink : repoLink ? repoLink : '',
                                         evaluations : eventData.evaluationConfiguration
                                     };
                                     const updatedEvent = { $push : { teams : team }};
@@ -178,6 +179,63 @@ class EventService {
                 callback(null, body);
             }
         });
+        
+    }
+    
+    public createGitLabSubGroup(eventData: Event, callback: (error: any, response: any) => void) {
+        let gitLabAPIURL = config.get("gitLabAPI");
+        let privateToken = config.get("privateToken");
+        let requestHeader = {
+            "PRIVATE-TOKEN": privateToken
+        };
+        let requestBody = {
+            "name": eventData.name,
+            "path": eventData.name,
+            "parent_id": eventData.organizerGroupId,
+            "description": eventData.problemStatement,
+            "private": true
+        };
+        request({
+            url: gitLabAPIURL + "groups",
+            method: "POST",
+            json: true,
+            headers: requestHeader,
+            body: requestBody
+        }, (error: any, response: any, body: any) => {
+            if(error) {
+                callback(error, null);
+            } else if(body) {
+                callback(null, body);
+            }
+        });
+
+    }
+
+    public createGitLabProject(nameSpaceId: any, teamId: any, callback: (error: any, response: any) => void) {
+        let gitLabAPIURL = config.get("gitLabAPI");
+        let privateToken = config.get("privateToken");
+        let requestHeader = {
+            "PRIVATE-TOKEN": privateToken
+        };
+        let requestBody = {
+            "name": teamId,
+            "path": teamId,
+            "namespace_id": nameSpaceId,
+            "private": true
+        };
+        request({
+            url: gitLabAPIURL + "projects",
+            method: "POST",
+            json: true,
+            headers: requestHeader,
+            body: requestBody
+        }, (error: any, response: any, body: any) => {
+            if(error) {
+                callback(error, null);
+            } else if(body) {
+                callback(null, body);
+            }
+        });
 
     }
 
@@ -192,13 +250,14 @@ class EventService {
                 let membersList = data[0].members;
                 let memberGitIds = membersList.map((a: any) => a.gitId);
                 console.log('memberGitIds : '+ memberGitIds);
-                this.createRepoForATeam(teamName, memberGitIds, (err, response) => {
-                    if(err) {
-                        callback(err, null);
-                    } else if(response) {
-                        callback(null, response);
-                    }
-                });
+                callback(null, memberGitIds);
+                // this.createRepoForATeam(teamName, memberGitIds, (err, response) => {
+                //     if(err) {
+                //         callback(err, null);
+                //     } else if(response) {
+                //         callback(null, response);
+                //     }
+                // });
             }
         });
     }

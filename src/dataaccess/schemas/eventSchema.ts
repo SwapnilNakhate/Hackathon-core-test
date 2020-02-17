@@ -52,6 +52,10 @@ class EventSchema {
                     required: true
                 },
                 technologies: [],
+                nameSpaceId: {
+                    type: String,
+                    required: true
+                },
                 teams :  [{
                     teamId: { type: Schema.Types.ObjectId, ref: 'Team' },
                     repoLink: { type: String },

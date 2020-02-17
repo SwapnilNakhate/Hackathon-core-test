@@ -14,12 +14,21 @@ class OrganizerController {
         try {
             const organizer = req.body;
             const organizerService = new OrganizerService();
-            organizerService.createOrganizerData(organizer, (error , result) => {
+            let groupId;
+            organizerService.createGitLabGroup(organizer, async (error , result) => {
                 if (error) {
                     res.send(error);
                 } else {
-                    res.send(result);
-                }
+                    groupId = result.id;
+                    organizerService.createOrganizerData(organizer, groupId, (error , result) => {
+                        if (error) {
+                            res.send(error);
+                        } else {
+                            console.log(result)
+                            res.send(result);
+                        }
+                    });
+                }                
             });
         } catch (e) {
             console.log("Exception in creating Organizer Data : ", e);

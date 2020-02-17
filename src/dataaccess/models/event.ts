@@ -5,6 +5,7 @@ class Event {
     public name: string;
     public logo: string;
     public organizerId: string;
+    public organizerGroupId: string;
     public shortDescription: string;
     public maxTeamSize: number;
     public startDateTime: Date;
@@ -16,6 +17,7 @@ class Event {
     public difficulty: string;
     public technologies: [any];
     public evaluationConfiguration: [evaluationConfigurationModel];
+    public nameSpaceId: string;
 
     constructor() {}
 

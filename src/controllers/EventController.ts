@@ -16,13 +16,21 @@ class EventController {
             logger.debug("Creating Event in a Controller");
             const event = req.body;
             const eventService = new EventService();
-            eventService.createEventData(event, (error , result) => {
+            eventService.createGitLabSubGroup(event, (error , result) => {
                 if (error) {
                     res.send(error);
                 } else {
-                    res.send(result);
+                    let nameSpaceId = result.id;
+                    eventService.createEventData(event, nameSpaceId, (error , result) => {
+                        if (error) {
+                            res.send(error);
+                        } else {
+                            res.send(result);
+                        }
+                    });
                 }
             });
+           
         } catch (e) {
             logger.error("Exception in creating Event Data : ", e);
         }
@@ -134,14 +142,24 @@ class EventController {
             logger.debug("Enroll for an Event");
             const eventId = req.body.eventId;
             const teamId = req.body.teamId;
+            const nameSpaceIdmId = req.body.nameSpaceId;
             const eventService = new EventService();
-            eventService.enrollForEvent(eventId, teamId, (error , result) => {
+            eventService.createGitLabProject(nameSpaceIdmId, teamId, (error , result) => {
                 if (error) {
                     res.status(403).send(error);
                 } else {
-                    res.status(200).send(result);
+                    let repoLink = result.http_url_to_repo;
+                    eventService.enrollForEvent(eventId, teamId, repoLink, (error , result) => {
+                        if (error) {
+                            res.status(403).send(error);
+                        } else {
+                            res.status(200).send(result);
+                        }
+                    });
                 }
             });
+
+            
         } catch (e) {
             logger.error("Exception in updating Event Data : ", e);
         }

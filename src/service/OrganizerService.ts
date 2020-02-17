@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 import Organizer = require("../dataaccess/mongoose/Organizer");
 import OrganizerRepository = require("../dataaccess/repository/OrganizerRepository");
+const request = require('request');
 import { getLogger } from 'log4js';
 const logger = getLogger("Organizer Service");
 
@@ -13,10 +14,11 @@ class OrganizerService {
         this.organizerRepository = new OrganizerRepository();
     }
 
-    public createOrganizerData(organizer: Organizer, callback: (error: any, response: any) => void) {
+    public createOrganizerData(organizer: Organizer, groupId: any, callback: (error: any, response: any) => void) {
         const salt = bcrypt.genSaltSync(config.get('saltRounds'));
         const hash = bcrypt.hashSync(organizer.password, salt);
         organizer.password = hash;
+        organizer.groupId = groupId;
         logger.debug('organizer password : '+organizer.password);
         this.organizerRepository.create(organizer, (error, result) => {
             if (error) {
@@ -93,6 +95,39 @@ class OrganizerService {
                 callback(errorMessage, null);
             }
         });
+    }
+
+    public createGitLabGroup(organizer: Organizer, callback: (error: any, response: any) => void) {
+        let gitLabAPIURL = config.get("gitLabAPI");
+        let privateToken = config.get("privateToken");
+        let requestHeader = {
+            "PRIVATE-TOKEN": privateToken
+        };
+        let requestBody = {
+            "name": organizer.name,
+            "path": organizer.name,
+            "description": organizer.organization,
+            "private": true
+        };
+        request({
+            url: gitLabAPIURL + "groups",
+            method: "POST",
+            json: true,
+            headers: requestHeader,
+            body: requestBody
+        }, (error: any, response: any, body: any) => {
+            if(error) {
+                logger.debug('GitLab error : '+error);
+                callback(error, null);
+            } else if(body) {
+                logger.debug('GitLab body : '+body);
+                callback(null, body);
+            } else if(response) {
+                logger.debug('GitLab response : '+response);
+                callback(null, response);
+            }
+        });
+
     }
 
 }

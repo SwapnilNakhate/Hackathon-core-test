@@ -6,8 +6,8 @@ metadata:
 spec:
 #  clusterIP: 100.65.96.55
   ports:
-    - port: 3160
-      targetPort: 3160
+    - port: 8080
+      targetPort: 8080
       nodePort: 30160
   type: NodePort
   selector:

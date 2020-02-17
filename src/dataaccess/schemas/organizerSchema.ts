@@ -34,6 +34,9 @@ class OrganizerSchema {
                 dob : {
                     type: String
                 },
+                groupId : {
+                    type: String
+                },
                 events : [{
                     type: Schema.Types.ObjectId,
                     ref: 'Event' 

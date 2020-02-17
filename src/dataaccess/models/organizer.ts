@@ -7,6 +7,7 @@ class Organizer {
     public contactNo: number;
     public events: [string];
     public dob: string;
+    public groupId: string;
     constructor() {}
 }
 export = Organizer;
